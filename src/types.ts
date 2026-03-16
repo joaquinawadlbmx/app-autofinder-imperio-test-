@@ -1,7 +1,7 @@
 export interface AutomationOpportunity {
   title: string;
   description: string;
-  complexity: 'Low' | 'Medium' | 'High';
+  complexity: 'Low' | 'Medium' | 'High' | 'Baja' | 'Media' | 'Alta';
   estimatedPrice: number;
   benefitROI: string;
   toolsRecommended: string[];
@@ -11,7 +11,7 @@ export interface AutomationReport {
   id: string;
   businessName: string;
   industry: string;
-  totalEstimatedSavings: string;
+  totalEstimatedSavings: string | number;
   opportunities: AutomationOpportunity[];
   nextSteps: string[];
   createdAt: string;

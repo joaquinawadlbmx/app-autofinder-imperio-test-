@@ -18,8 +18,8 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
     employeeCount: '1-10'
   });
 
-  const industries = ['E-commerce', 'Real Estate', 'SaaS', 'Healthcare', 'Legal', 'Manufacturing', 'Other'];
-  const commonTools = ['Excel/Sheets', 'Slack', 'Trello/Asana', 'HubSpot/Salesforce', 'Zapier', 'Mailchimp', 'QuickBooks'];
+  const industries = ['E-commerce', 'Inmobiliaria', 'SaaS', 'Salud', 'Legal', 'Manufactura', 'Otros'];
+  const commonTools = ['Shopify', 'WordPress', 'Klaviyo', 'GHL (Go High Level)', 'Zapier', 'N8N', 'Airtable', 'Make', 'WhatsApp'];
 
   const handleNext = () => setStep(s => s + 1);
   const handleBack = () => setStep(s => s - 1);
@@ -40,20 +40,20 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex items-center">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
-                step >= i ? 'bg-violet-500 text-white glow-violet' : 'bg-zinc-800 text-zinc-500'
+                step >= i ? 'bg-violet-500 text-white glow-violet' : 'bg-zinc-800/50 text-zinc-500'
               }`}>
                 {step > i ? <CheckCircle2 size={20} /> : i}
               </div>
-              {i < 3 && <div className={`w-24 h-1 mx-2 rounded-full ${step > i ? 'bg-violet-500' : 'bg-zinc-800'}`} />}
+              {i < 3 && <div className={`w-24 h-1 mx-2 rounded-full ${step > i ? 'bg-violet-500' : 'bg-zinc-800/50'}`} />}
             </div>
           ))}
         </div>
         <h2 className="text-2xl font-display font-bold">
-          {step === 1 && "Business Foundations"}
-          {step === 2 && "Operational Stack"}
-          {step === 3 && "Identify Pain Points"}
+          {step === 1 && "Bases del Negocio"}
+          {step === 2 && "Stack Operativo"}
+          {step === 3 && "Identificar Puntos de Dolor"}
         </h2>
-        <p className="text-zinc-400">Tell us about the business to find the best automation opportunities.</p>
+        <p className="text-zinc-500">Cuéntanos sobre el negocio para encontrar las mejores oportunidades de automatización.</p>
       </div>
 
       <AnimatePresence mode="wait">
@@ -67,28 +67,28 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
           {step === 1 && (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Business Name</label>
+                <label className="block text-sm font-medium text-zinc-500 mb-2">Nombre del Negocio</label>
                 <input
                   type="text"
                   value={formData.businessName}
                   onChange={e => setFormData({ ...formData, businessName: e.target.value })}
-                  placeholder="e.g. Acme Corp"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500 transition-colors"
+                  placeholder="ej. Acme Corp"
+                  className="w-full input-field border rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500 transition-colors"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Industry</label>
+                <label className="block text-sm font-medium text-zinc-500 mb-2">Industria</label>
                 <select
                   value={formData.industry}
                   onChange={e => setFormData({ ...formData, industry: e.target.value })}
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500 transition-colors"
+                  className="w-full input-field border rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500 transition-colors"
                 >
-                  <option value="">Select Industry</option>
+                  <option value="">Seleccionar Industria</option>
                   {industries.map(i => <option key={i} value={i}>{i}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Employee Count</label>
+                <label className="block text-sm font-medium text-zinc-500 mb-2">Número de Empleados</label>
                 <div className="grid grid-cols-3 gap-3">
                   {['1-10', '11-50', '50+'].map(size => (
                     <button
@@ -97,7 +97,7 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
                       className={`py-2 rounded-lg border transition-all ${
                         formData.employeeCount === size 
                           ? 'bg-violet-500/10 border-violet-500 text-violet-500' 
-                          : 'border-zinc-800 text-zinc-500 hover:border-zinc-700'
+                          : 'border-zinc-800/50 text-zinc-500 hover:border-zinc-700'
                       }`}
                     >
                       {size}
@@ -110,7 +110,7 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
 
           {step === 2 && (
             <div className="space-y-4">
-              <label className="block text-sm font-medium text-zinc-400 mb-2">Current Tech Stack (Select all that apply)</label>
+              <label className="block text-sm font-medium text-zinc-500 mb-2">Stack Tecnológico Actual (Selecciona todos los que apliquen)</label>
               <div className="grid grid-cols-2 gap-3">
                 {commonTools.map(tool => (
                   <button
@@ -119,7 +119,7 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
                     className={`px-4 py-3 rounded-xl border text-left transition-all ${
                       formData.techStack.includes(tool)
                         ? 'bg-violet-500/10 border-violet-500 text-violet-500'
-                        : 'border-zinc-800 text-zinc-500 hover:border-zinc-700'
+                        : 'border-zinc-800/50 text-zinc-500 hover:border-zinc-700'
                     }`}
                   >
                     {tool}
@@ -132,12 +132,12 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
           {step === 3 && (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">What are the main bottlenecks?</label>
+                <label className="block text-sm font-medium text-zinc-500 mb-2">¿Cuáles son los principales cuellos de botella?</label>
                 <textarea
                   value={formData.painPoints}
                   onChange={e => setFormData({ ...formData, painPoints: e.target.value })}
-                  placeholder="e.g. Manual data entry from emails to sheets, slow response times to leads..."
-                  className="w-full h-40 bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500 transition-colors resize-none"
+                  placeholder="ej. Entrada manual de datos de correos a hojas de cálculo, tiempos de respuesta lentos a prospectos..."
+                  className="w-full h-40 input-field border rounded-xl px-4 py-3 focus:outline-none focus:border-violet-500 transition-colors resize-none"
                 />
               </div>
             </div>
@@ -147,10 +147,10 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
             {step > 1 ? (
               <button
                 onClick={handleBack}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl text-zinc-400 hover:text-zinc-100 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl text-zinc-500 hover:text-violet-500 transition-colors"
               >
                 <ArrowLeft size={20} />
-                Back
+                Atrás
               </button>
             ) : <div />}
 
@@ -160,7 +160,7 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
                 disabled={!formData.businessName || !formData.industry}
                 className="flex items-center gap-2 px-8 py-3 rounded-xl bg-violet-500 text-white font-bold hover:bg-violet-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed glow-violet"
               >
-                Next
+                Siguiente
                 <ArrowRight size={20} />
               </button>
             ) : (
@@ -172,11 +172,11 @@ export default function DiagnosticWizard({ onComplete, isProcessing }: Diagnosti
                 {isProcessing ? (
                   <>
                     <Loader2 className="animate-spin" size={20} />
-                    Analyzing...
+                    Analizando...
                   </>
                 ) : (
                   <>
-                    Generate Report
+                    Generar Reporte
                     <Zap size={20} />
                   </>
                 )}

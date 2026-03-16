@@ -6,32 +6,33 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 export async function generateAutomationReport(input: DiagnosticInput): Promise<AutomationReport> {
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
-    contents: `Analyze the following business for automation opportunities. 
-    Business Name: ${input.businessName}
-    Industry: ${input.industry}
-    Tech Stack: ${input.techStack.join(", ")}
-    Pain Points: ${input.painPoints}
-    Employee Count: ${input.employeeCount}
+    contents: `Analiza el siguiente negocio para encontrar oportunidades de automatización.
+    Nombre del Negocio: ${input.businessName}
+    Industria: ${input.industry}
+    Stack Tecnológico: ${input.techStack.join(", ")}
+    Puntos de Dolor: ${input.painPoints}
+    Número de Empleados: ${input.employeeCount}
     
-    Calculate potential savings and identify at least 3 high-impact automation opportunities.
-    Return a structured JSON report.`,
+    Calcula el ahorro potencial anual y identifica al menos 3 oportunidades de automatización de alto impacto.
+    Responde en ESPAÑOL.
+    Devuelve un reporte JSON estructurado.`,
     config: {
       responseMimeType: "application/json",
       responseSchema: {
         type: Type.OBJECT,
         properties: {
           businessName: { type: Type.STRING },
-          totalEstimatedSavings: { type: Type.STRING },
+          totalEstimatedSavings: { type: Type.STRING, description: "Ahorro total estimado, ej: '$15,000/año'" },
           opportunities: {
             type: Type.ARRAY,
             items: {
               type: Type.OBJECT,
               properties: {
-                title: { type: Type.STRING },
-                description: { type: Type.STRING },
-                complexity: { type: Type.STRING, enum: ["Low", "Medium", "High"] },
-                estimatedPrice: { type: Type.NUMBER },
-                benefitROI: { type: Type.STRING },
+                title: { type: Type.STRING, description: "Título de la oportunidad en español" },
+                description: { type: Type.STRING, description: "Descripción detallada en español" },
+                complexity: { type: Type.STRING, enum: ["Baja", "Media", "Alta"] },
+                estimatedPrice: { type: Type.NUMBER, description: "Precio estimado de implementación en USD" },
+                benefitROI: { type: Type.STRING, description: "Explicación del ROI en español" },
                 toolsRecommended: {
                   type: Type.ARRAY,
                   items: { type: Type.STRING }
@@ -42,7 +43,7 @@ export async function generateAutomationReport(input: DiagnosticInput): Promise<
           },
           nextSteps: {
             type: Type.ARRAY,
-            items: { type: Type.STRING }
+            items: { type: Type.STRING, description: "Pasos a seguir en español" }
           }
         },
         required: ["businessName", "totalEstimatedSavings", "opportunities", "nextSteps"]

@@ -9,23 +9,63 @@
   --font-display: "Space Grotesk", sans-serif;
 }
 
+:root {
+  --sidebar-bg: rgba(9, 9, 11, 0.5);
+  --sidebar-border: #27272a;
+  --input-bg: #09090b;
+  --input-border: #27272a;
+}
+
+.light {
+  --sidebar-bg: rgba(250, 250, 250, 0.8);
+  --sidebar-border: #e4e4e7;
+  --input-bg: #ffffff;
+  --input-border: #e4e4e7;
+}
+
 @layer base {
   body {
-    @apply bg-zinc-950 text-zinc-100 font-sans antialiased;
+    @apply bg-zinc-950 text-zinc-100 font-sans antialiased transition-colors duration-300;
+  }
+  
+  .light body {
+    @apply bg-white text-zinc-900;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-zinc-900/50 border border-zinc-800 backdrop-blur-sm rounded-2xl;
+    @apply bg-zinc-900/50 border border-zinc-800 backdrop-blur-sm rounded-2xl transition-all duration-300;
+  }
+  
+  .light .glass-card {
+    @apply bg-zinc-50/80 border-zinc-200 shadow-sm text-zinc-900;
+  }
+  
+  .sidebar-container {
+    background-color: var(--sidebar-bg);
+    border-color: var(--sidebar-border);
+  }
+  
+  .input-field {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
   }
   
   .glow-violet {
     @apply shadow-[0_0_20px_rgba(139,92,246,0.15)];
   }
   
+  .light .glow-violet {
+    @apply shadow-[0_4px_20px_rgba(139,92,246,0.1)];
+  }
+  
   .glow-emerald {
     @apply shadow-[0_0_20px_rgba(16,185,129,0.15)];
+  }
+  
+  .light .glow-emerald {
+    @apply shadow-[0_4px_20px_rgba(16,185,129,0.1)];
   }
 }
 
